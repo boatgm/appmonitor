@@ -1,0 +1,10 @@
+完全兼容scrapy 自带指令
+使用umspider同一控制接口
+使用scrapy SETTING 支持DNScache Httpcache
+各个市场可以独立运行和测试
+方便使用scrapy shell进行模板测试
+数据库记录爬虫运行记录
+支持POST请求页面
+实现任务性质分离，rank update package content
+随机代理和USER_AGENT
+增加异常监测表

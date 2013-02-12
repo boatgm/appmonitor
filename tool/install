@@ -1,0 +1,9 @@
+#!/bin/bash
+/*========================================================================
+#   FileName: install
+#     Author: gongming
+#      Email: gongming@umeng.com
+#   HomePage: http://umeng.com
+# LastChange: 2013-01-10 15:49:02
+========================================================================*/
+sudo pip install w3lib scrapy 

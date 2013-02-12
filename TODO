@@ -1,0 +1,9 @@
+md5改为_id
+content爬虫自检
+全面分布式支持
+爬虫http server监控，基于scrapd
+全面兼容marketanalyzer
+增加标识:rank recommend available
+增加所有还未采集的市场
+增加市场模板
+packages analysis right now

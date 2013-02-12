@@ -1,0 +1,25 @@
+#!/bin/bash
+#========================================================================
+#   FileName: hosts_update.sh
+#     Author: gongming
+#      Email: mg90@foxmail.com
+#   HomePage: wrud.sinaapp.com
+# LastChange: 2013-01-04 22:39:27
+#========================================================================
+echo "Update Hosts To Add Speed..."
+HOSTFILE=.hosts
+DOMAINLIST=("itunes.apple.com play.google.com www.waptw.com")
+
+
+mv $HOSTFILE ${HOSTFILE}"_bk"
+
+echo "localhost 127.0.0.1" > $HOSTFILE
+for domain in $DOMAINLIST ;{
+   for ip in `nslookup ${domain}|grep -o '[0-9.]\{9,\}'` ;{
+      echo $ip $domain >> $HOSTFILE
+  }
+}
+
+
+curl -f "https://smarthosts.googlecode.com/svn/trunk/hosts" >> $HOSTFILE
+echo "Update Hosts To Add Speed is OK !!!"

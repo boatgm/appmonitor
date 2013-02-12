@@ -1,0 +1,469 @@
+.
+├── bin
+│   ├── scrapy
+│   ├── scrapyd
+│   ├── umcrawler
+│   └── umspider
+├── conf
+│   ├── admin.py
+│   ├── dbtest
+│   ├── __init__.py
+│   ├── manage.py
+│   ├── polls
+│   │   ├── admin.py
+│   │   ├── __init__.py
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   └── views.py
+│   ├── settings.py
+│   └── urls.py
+├── crawler
+│   ├── __init__.py
+│   ├── __init__.pyc
+│   ├── items.py
+│   ├── items.pyc
+│   ├── parser.py
+│   ├── pipelines.py
+│   ├── settings.py
+│   └── spiders
+│       ├── AppSpider.py
+│       ├── CommentSpider.py
+│       ├── ContentSpider.py
+│       ├── ImgSpider.py
+│       ├── IndexSpider.py
+│       ├── __init__.py
+│       └── IsBullshitSpider.py
+├── dbs
+│   ├── crawler.db
+│   └── default.db
+├── doc
+│   ├── filelist
+│   └── filetree
+├── indexcrawler
+│   ├── __init__.py
+│   ├── __init__.pyc
+│   ├── items.py
+│   ├── items.pyc
+│   ├── pipelines.py
+│   ├── pipelines.pyc
+│   ├── settings.py
+│   ├── settings.pyc
+│   ├── spiders
+│   │   ├── 360Spiser.py
+│   │   ├── 360Spiser.pyc
+│   │   ├── __init__.py
+│   │   ├── __init__.pyc
+│   │   ├── WaptwSpider.py
+│   │   └── WaptwSpider.pyc
+│   ├── temp.py
+│   └── UMDict.py
+├── README.md
+├── scrapy
+│   ├── bin
+│   │   ├── runtests.bat
+│   │   ├── runtests.sh
+│   │   ├── scrapy
+│   │   └── scrapyd
+│   ├── extras
+│   │   ├── coverage-report.sh
+│   │   ├── makedeb.py
+│   │   ├── qps-bench-server.py
+│   │   ├── qpsclient.py
+│   │   ├── scrapy.1
+│   │   ├── scrapy_bash_completion
+│   │   ├── scrapy.bat
+│   │   ├── scrapyd.tac
+│   │   ├── scrapy-ws.py
+│   │   └── test-scrapyd.sh
+│   ├── scrapy
+│   │   ├── cmdline.py
+│   │   ├── command.py
+│   │   ├── commands
+│   │   │   ├── check.py
+│   │   │   ├── crawl.py
+│   │   │   ├── deploy.py
+│   │   │   ├── edit.py
+│   │   │   ├── fetch.py
+│   │   │   ├── genspider.py
+│   │   │   ├── __init__.py
+│   │   │   ├── list.py
+│   │   │   ├── parse.py
+│   │   │   ├── runspider.py
+│   │   │   ├── server.py
+│   │   │   ├── settings.py
+│   │   │   ├── shell.py
+│   │   │   ├── startproject.py
+│   │   │   ├── version.py
+│   │   │   └── view.py
+│   │   ├── conf.py
+│   │   ├── contracts
+│   │   │   ├── default.py
+│   │   │   └── __init__.py
+│   │   ├── contrib
+│   │   │   ├── closespider.py
+│   │   │   ├── corestats.py
+│   │   │   ├── debug.py
+│   │   │   ├── djangoitem.py
+│   │   │   ├── downloadermiddleware
+│   │   │   │   ├── chunked.py
+│   │   │   │   ├── cookies.py
+│   │   │   │   ├── defaultheaders.py
+│   │   │   │   ├── downloadtimeout.py
+│   │   │   │   ├── httpauth.py
+│   │   │   │   ├── httpcache.py
+│   │   │   │   ├── httpcompression.py
+│   │   │   │   ├── httpproxy.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── redirect.py
+│   │   │   │   ├── retry.py
+│   │   │   │   ├── robotstxt.py
+│   │   │   │   ├── stats.py
+│   │   │   │   └── useragent.py
+│   │   │   ├── exporter
+│   │   │   │   └── __init__.py
+│   │   │   ├── feedexport.py
+│   │   │   ├── httpcache.py
+│   │   │   ├── __init__.py
+│   │   │   ├── linkextractors
+│   │   │   │   ├── htmlparser.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── lxmlhtml.py
+│   │   │   │   ├── regex.py
+│   │   │   │   └── sgml.py
+│   │   │   ├── loader
+│   │   │   │   ├── common.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── processor.py
+│   │   │   ├── logstats.py
+│   │   │   ├── memdebug.py
+│   │   │   ├── memusage.py
+│   │   │   ├── pipeline
+│   │   │   │   ├── images.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── media.py
+│   │   │   ├── spidermiddleware
+│   │   │   │   ├── depth.py
+│   │   │   │   ├── httperror.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── offsite.py
+│   │   │   │   ├── referer.py
+│   │   │   │   └── urllength.py
+│   │   │   ├── spiders
+│   │   │   │   ├── crawl.py
+│   │   │   │   ├── feed.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── init.py
+│   │   │   │   └── sitemap.py
+│   │   │   ├── spiderstate.py
+│   │   │   ├── statsmailer.py
+│   │   │   ├── throttle.py
+│   │   │   └── webservice
+│   │   │       ├── crawler.py
+│   │   │       ├── enginestatus.py
+│   │   │       ├── __init__.py
+│   │   │       └── stats.py
+│   │   ├── contrib_exp
+│   │   │   ├── djangoitem.py
+│   │   │   ├── downloadermiddleware
+│   │   │   │   ├── decompression.py
+│   │   │   │   └── __init__.py
+│   │   │   ├── __init__.py
+│   │   │   └── iterators.py
+│   │   ├── core
+│   │   │   ├── downloader
+│   │   │   │   ├── handlers
+│   │   │   │   │   ├── file.py
+│   │   │   │   │   ├── http.py
+│   │   │   │   │   ├── __init__.py
+│   │   │   │   │   └── s3.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── middleware.py
+│   │   │   │   └── webclient.py
+│   │   │   ├── engine.py
+│   │   │   ├── __init__.py
+│   │   │   ├── scheduler.py
+│   │   │   ├── scraper.py
+│   │   │   └── spidermw.py
+│   │   ├── crawler.py
+│   │   ├── dupefilter.py
+│   │   ├── exceptions.py
+│   │   ├── extension.py
+│   │   ├── http
+│   │   │   ├── common.py
+│   │   │   ├── cookies.py
+│   │   │   ├── headers.py
+│   │   │   ├── __init__.py
+│   │   │   ├── request
+│   │   │   │   ├── form.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── rpc.py
+│   │   │   └── response
+│   │   │       ├── html.py
+│   │   │       ├── __init__.py
+│   │   │       ├── text.py
+│   │   │       └── xml.py
+│   │   ├── __init__.py
+│   │   ├── interfaces.py
+│   │   ├── item.py
+│   │   ├── linkextractor.py
+│   │   ├── link.py
+│   │   ├── logformatter.py
+│   │   ├── log.py
+│   │   ├── mail.py
+│   │   ├── middleware.py
+│   │   ├── mime.types
+│   │   ├── project.py
+│   │   ├── resolver.py
+│   │   ├── responsetypes.py
+│   │   ├── selector
+│   │   │   ├── __init__.py
+│   │   │   ├── libxml2document.py
+│   │   │   ├── libxml2sel.py
+│   │   │   ├── list.py
+│   │   │   ├── lxmldocument.py
+│   │   │   └── lxmlsel.py
+│   │   ├── settings
+│   │   │   ├── default_settings.py
+│   │   │   ├── deprecated.py
+│   │   │   └── __init__.py
+│   │   ├── shell.py
+│   │   ├── signalmanager.py
+│   │   ├── signals.py
+│   │   ├── spidermanager.py
+│   │   ├── spider.py
+│   │   ├── squeue.py
+│   │   ├── statscol.py
+│   │   ├── stats.py
+│   │   ├── telnet.py
+│   │   ├── templates
+│   │   │   ├── project
+│   │   │   │   ├── module
+│   │   │   │   │   ├── __init__.py
+│   │   │   │   │   ├── items.py.tmpl
+│   │   │   │   │   ├── pipelines.py.tmpl
+│   │   │   │   │   ├── settings.py.tmpl
+│   │   │   │   │   └── spiders
+│   │   │   │   │       └── __init__.py
+│   │   │   │   └── scrapy.cfg
+│   │   │   └── spiders
+│   │   │       ├── basic.tmpl
+│   │   │       ├── crawl.tmpl
+│   │   │       ├── csvfeed.tmpl
+│   │   │       └── xmlfeed.tmpl
+│   │   ├── tests
+│   │   │   ├── __init__.py
+│   │   │   ├── sample_data
+│   │   │   │   ├── compressed
+│   │   │   │   │   ├── feed-sample1.tar
+│   │   │   │   │   ├── feed-sample1.xml
+│   │   │   │   │   ├── feed-sample1.xml.bz2
+│   │   │   │   │   ├── feed-sample1.xml.gz
+│   │   │   │   │   ├── feed-sample1.zip
+│   │   │   │   │   ├── html-gzip.bin
+│   │   │   │   │   ├── html-rawdeflate.bin
+│   │   │   │   │   ├── html-zlibdeflate.bin
+│   │   │   │   │   ├── truncated-crc-error.gz
+│   │   │   │   │   └── truncated-crc-error-short.gz
+│   │   │   │   ├── feeds
+│   │   │   │   │   ├── feed-sample1.xml
+│   │   │   │   │   ├── feed-sample2.xml
+│   │   │   │   │   ├── feed-sample3.csv
+│   │   │   │   │   ├── feed-sample4.csv
+│   │   │   │   │   └── feed-sample5.csv
+│   │   │   │   ├── link_extractor
+│   │   │   │   │   ├── linkextractor_latin1.html
+│   │   │   │   │   ├── linkextractor_noenc.html
+│   │   │   │   │   └── sgml_linkextractor.html
+│   │   │   │   └── test_site
+│   │   │   │       ├── index.html
+│   │   │   │       ├── item1.html
+│   │   │   │       └── item2.html
+│   │   │   ├── test_cmdline
+│   │   │   │   ├── extensions.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── settings.py
+│   │   │   ├── test_command_fetch.py
+│   │   │   ├── test_command_shell.py
+│   │   │   ├── test_commands.py
+│   │   │   ├── test_command_version.py
+│   │   │   ├── test_contracts.py
+│   │   │   ├── test_contrib_exporter.py
+│   │   │   ├── test_contrib_feedexport.py
+│   │   │   ├── test_contrib_linkextractors.py
+│   │   │   ├── test_contrib_loader.py
+│   │   │   ├── test_contrib_spiderstate.py
+│   │   │   ├── test_dependencies.py
+│   │   │   ├── test_djangoitem
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── models.py
+│   │   │   │   └── settings.py
+│   │   │   ├── test_downloader_handlers.py
+│   │   │   ├── test_downloadermiddleware_cookies.py
+│   │   │   ├── test_downloadermiddleware_decompression.py
+│   │   │   ├── test_downloadermiddleware_defaultheaders.py
+│   │   │   ├── test_downloadermiddleware_downloadtimeout.py
+│   │   │   ├── test_downloadermiddleware_httpauth.py
+│   │   │   ├── test_downloadermiddleware_httpcache.py
+│   │   │   ├── test_downloadermiddleware_httpcompression.py
+│   │   │   ├── test_downloadermiddleware_httpproxy.py
+│   │   │   ├── test_downloadermiddleware_redirect.py
+│   │   │   ├── test_downloadermiddleware_retry.py
+│   │   │   ├── test_downloadermiddleware_stats.py
+│   │   │   ├── test_downloadermiddleware_useragent.py
+│   │   │   ├── test_dupefilter.py
+│   │   │   ├── test_engine.py
+│   │   │   ├── test_http_cookies.py
+│   │   │   ├── test_http_headers.py
+│   │   │   ├── test_http_request.py
+│   │   │   ├── test_http_response.py
+│   │   │   ├── test_item.py
+│   │   │   ├── test_libxml2.py
+│   │   │   ├── test_link.py
+│   │   │   ├── test_logformatter.py
+│   │   │   ├── test_log.py
+│   │   │   ├── test_mail.py
+│   │   │   ├── test_middleware.py
+│   │   │   ├── test_pipeline_images.py
+│   │   │   ├── test_pipeline_media.py
+│   │   │   ├── test_responsetypes.py
+│   │   │   ├── test_selector_libxml2.py
+│   │   │   ├── test_selector_lxml.py
+│   │   │   ├── test_selector.py
+│   │   │   ├── test_settings.py
+│   │   │   ├── test_spidermanager
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── test_spiders
+│   │   │   │       ├── __init__.py
+│   │   │   │       ├── spider0.py
+│   │   │   │       ├── spider1.py
+│   │   │   │       ├── spider2.py
+│   │   │   │       └── spider3.py
+│   │   │   ├── test_spidermiddleware_depth.py
+│   │   │   ├── test_spidermiddleware_httperror.py
+│   │   │   ├── test_spidermiddleware_offsite.py
+│   │   │   ├── test_spidermiddleware_referer.py
+│   │   │   ├── test_spidermiddleware_urllength.py
+│   │   │   ├── test_spider.py
+│   │   │   ├── test_squeue.py
+│   │   │   ├── test_stats.py
+│   │   │   ├── test_urlparse_monkeypatches.py
+│   │   │   ├── test_utils_conf.py
+│   │   │   ├── test_utils_datatypes.py
+│   │   │   ├── test_utils_defer.py
+│   │   │   ├── test_utils_gz.py
+│   │   │   ├── test_utils_httpobj.py
+│   │   │   ├── test_utils_http.py
+│   │   │   ├── test_utils_iterators.py
+│   │   │   ├── test_utils_jsonrpc.py
+│   │   │   ├── test_utils_misc
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── test.egg
+│   │   │   │   └── test_walk_modules
+│   │   │   │       ├── __init__.py
+│   │   │   │       ├── mod
+│   │   │   │       │   ├── __init__.py
+│   │   │   │       │   └── mod0.py
+│   │   │   │       └── mod1.py
+│   │   │   ├── test_utils_pqueue.py
+│   │   │   ├── test_utils_python.py
+│   │   │   ├── test_utils_queue.py
+│   │   │   ├── test_utils_reqser.py
+│   │   │   ├── test_utils_request.py
+│   │   │   ├── test_utils_response.py
+│   │   │   ├── test_utils_serialize.py
+│   │   │   ├── test_utils_signal.py
+│   │   │   ├── test_utils_sitemap.py
+│   │   │   ├── test_utils_spider.py
+│   │   │   ├── test_utils_template.py
+│   │   │   ├── test_utils_url.py
+│   │   │   └── test_webclient.py
+│   │   ├── utils
+│   │   │   ├── conf.py
+│   │   │   ├── console.py
+│   │   │   ├── datatypes.py
+│   │   │   ├── decorator.py
+│   │   │   ├── defer.py
+│   │   │   ├── deprecate.py
+│   │   │   ├── display.py
+│   │   │   ├── engine.py
+│   │   │   ├── ftp.py
+│   │   │   ├── gz.py
+│   │   │   ├── httpobj.py
+│   │   │   ├── http.py
+│   │   │   ├── __init__.py
+│   │   │   ├── iterators.py
+│   │   │   ├── job.py
+│   │   │   ├── jsonrpc.py
+│   │   │   ├── markup.py
+│   │   │   ├── misc.py
+│   │   │   ├── multipart.py
+│   │   │   ├── ossignal.py
+│   │   │   ├── pqueue.py
+│   │   │   ├── project.py
+│   │   │   ├── py26.py
+│   │   │   ├── py27.py
+│   │   │   ├── python.py
+│   │   │   ├── queue.py
+│   │   │   ├── reactor.py
+│   │   │   ├── reqser.py
+│   │   │   ├── request.py
+│   │   │   ├── response.py
+│   │   │   ├── serialize.py
+│   │   │   ├── signal.py
+│   │   │   ├── sitemap.py
+│   │   │   ├── spider.py
+│   │   │   ├── template.py
+│   │   │   ├── testproc.py
+│   │   │   ├── test.py
+│   │   │   ├── testsite.py
+│   │   │   ├── trackref.py
+│   │   │   ├── txweb.py
+│   │   │   └── url.py
+│   │   ├── webservice.py
+│   │   └── xlib
+│   │       ├── __init__.py
+│   │       ├── lsprofcalltree.py
+│   │       ├── ordereddict.py
+│   │       ├── pydispatch
+│   │       │   ├── dispatcher.py
+│   │       │   ├── errors.py
+│   │       │   ├── __init__.py
+│   │       │   ├── license.txt
+│   │       │   ├── robustapply.py
+│   │       │   ├── robust.py
+│   │       │   └── saferef.py
+│   │       └── urlparse_monkeypatches.py
+│   └── scrapyd
+│       ├── app.py
+│       ├── config.py
+│       ├── default_scrapyd.conf
+│       ├── eggstorage.py
+│       ├── eggutils.py
+│       ├── environ.py
+│       ├── __init__.py
+│       ├── interfaces.py
+│       ├── launcher.py
+│       ├── poller.py
+│       ├── runner.py
+│       ├── scheduler.py
+│       ├── script.py
+│       ├── spiderqueue.py
+│       ├── sqlite.py
+│       ├── tests
+│       │   ├── __init__.py
+│       │   ├── mybot.egg
+│       │   ├── test_dont_load_settings.py
+│       │   ├── test_eggstorage.py
+│       │   ├── test_environ.py
+│       │   ├── test_poller.py
+│       │   ├── test_scheduler.py
+│       │   ├── test_spiderqueue.py
+│       │   ├── test_sqlite.py
+│       │   └── test_utils.py
+│       ├── utils.py
+│       ├── webservice.py
+│       └── website.py
+├── scrapy.cfg
+└── scrapy.cfg.bk
+
+57 directories, 409 files
