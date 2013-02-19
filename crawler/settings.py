@@ -3,8 +3,7 @@ STORE_PATH = '/home/boat/workspace/data/package'
 PROJECT_PATH = '/home/boat/workspace/code/minicrawler'
 LIMIT = 10000
 
-BOT_NAME = 'crawler'
-BOT_VERSION = '0.1.0'
+BOT_NAME = 'marketcrawler'
 
 SPIDER_MODULES = ['crawler.spiders']
 NEWSPIDER_MODULE = 'crawler.spiders'
@@ -30,11 +29,6 @@ DOWNLOADER_MIDDLEWARES = {
     }
 REDIRECT_ENABLED = False
 REDIRECT_MAX_TIMES =0 
-
-MONGODB_SERVER = "localhost"
-MONGODB_PORT = 27017
-#MONGODB_DB = "marketcrawler"
-MONGODB_DB = "test"
 
 MONGODB = {'host':'localhost','port':27017,'name':'test'}
 MYSQLDB = {'host':'localhost','port':27017,'name':'test','user':'root','pwd':'root'}

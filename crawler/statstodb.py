@@ -1,6 +1,7 @@
 from scrapy.xlib.pydispatch import dispatcher
 from scrapy import signals
 from scrapy import log
+#from crawler import stats
 from scrapy.stats import stats
 import pymongo
 import datetime

@@ -18,7 +18,8 @@ category_url=[
 def contenturls():
     urls = []
     db = DBUtil.get_db()
-    res = db.appmeta.find({"$or":[{"market":'360'},{"market":'waptw'}],"name":None,"avaiable":None},{"url":1,"md5":1,"_id":0},limit=LIMIT)
+    #res = db.appmeta.find({"$or":[{"market":'360'},{"market":'waptw'}],"name":None,"avaiable":None},{"url":1,"md5":1,"_id":0},limit=LIMIT)
+    res = db.appmeta.find({"name":None,"avaiable":None},{"url":1,"md5":1,"_id":0},limit=LIMIT)
     for row in res:
         urls.append(row['url'])
         db.appmeta.update({"md5":row['md5']},{"$set":{"avaiable":0}})
@@ -27,7 +28,7 @@ def contenturls():
 def updateurls():
     urls = []
     db = DBUtil.get_db()
-    res = db.appmeta.find({"$or":[{"market":'waptw'}],"avaiable":1},{"url":1,"md5":1,"_id":0},limit=LIMIT)
+    res = db.appmeta.find({"avaiable":1},{"url":1,"md5":1,"_id":0},limit=LIMIT)
     for row in res:
         urls.append(row['url'])
         #db.appmeta.update({"md5":row['md5']},{"$inc":{"lock":2}})
@@ -45,16 +46,13 @@ def commenturls():
 def packages():
     urls = []
     db = DBUtil.get_db()
-    res = db.appmeta.find({"$or":[{"market":'waptw'}],"package_url":{"$exists":True},"ulock":None},{"category_general":1,"app_id":1,"app_version":1,"market":1,"package_url":1,"md5":1,"_id":0},limit=10)
+    res = db.appmeta.find({"package_url":{"$exists":True},"avaiable":1},{"app_id":1,"app_version":1,"market":1,"package_url":1,"md5":1,"_id":0},limit=LIMIT)
     for row in res:
         print row['package_url']
         url = {}
-        url['package_url'] = row['package_url']
-        url['app_id'] = row['app_id']
-        url['app_version'] = row['app_version']
-        url['market'] = row['market']
+        url['url'] = row['package_url']
         url['md5'] = row['md5']
-        url['category_general'] = row['category_general']
+        url['category_general'] = "app"
         urls.append(url)
     #    urls.append(row['comment_url'])
     #    #db.appmeta.update({"md5":row['md5']},{"$inc":{"lock":4}})
