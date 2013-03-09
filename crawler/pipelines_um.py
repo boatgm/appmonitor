@@ -47,7 +47,7 @@ class mongo_storage(object):
         try:
             item['category_detail'] = UMDict[item['categroy']]
         except Exception as e:
-            db.exceptions.update({"market":item['market'],"date":self.date},
+            self.db.exceptions.update({"market":item['market'],"date":self.date},
                     {"$addToSet":{"unknown_catagory":item['category']}},True)
 
         self.db.appmeta.update({'md5':item['md5']},
@@ -68,16 +68,13 @@ class mongo_storage(object):
 
     def process_update_item(self,item):
         """ update item`s download number"""
-        if self.db.appmeta.find({'md5':item['md5']},{"package_name":1,"app_id":1}):
-            self.db.appmeta.update({'md5':item['md5']},
-                {"$set":{"download."+self.date:item['down']}},True)
-        else:
-            self.db.appmeta.update({'md5':item['md5']},{
+        if True:
+            self.db.appmeta.update({'md5':item['md5']},{"$set":{
                 'md5':item['md5'],
                 'url':item['url'],
                 'market':item['market'],
                 'download':{self.date:item['down']}
-                },True)
+                }},True)
 
     def process_apk_item(self,item):
         self.db.appmeta.update({'md5':item['md5']},

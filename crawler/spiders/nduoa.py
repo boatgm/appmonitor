@@ -58,21 +58,19 @@ def parse_content(response):
         item['app_version'] = hxs.select("//div[@class=\"name\"]/span[@class=\"version\"]/text()").re(r"[0-9.]+")[0]
         item['language'] = "cn"
         item['package_url'] = "http://www.nduoa.com"+hxs.select("//a[@class=\"d_pc_normal\"]/@href").extract()[0]
-        item['package_md5'] = md5(item['package_url']).hexdigest()
-        item['package_name'] = ""
+        item['package_name'] = None
         item['size'] = hxs.select("//div[@class=\"size row\"]/text()").extract()[0][3::]
-        item['comment_url'] = ""
+        item['comment_url'] = None
         item['icon'] = hxs.select("//div[@class=\"icon\"]/img/@src").extract()[0]
         item['market'] = "nduoa"
         item['images'] = hxs.select("//ul[@class=\"shotbox\"]/li/img/@src").extract()
         item['description'] =  "".join(hxs.select("//div[@class=\"inner\"]/p").extract())
-        item['category_general'] = "app" #"game"
-        item['category_detail'] = hxs.select("//div[@id=\"breadcrumbs\"]/span[3]/a/text()").extract()[0]
+        item['category'] = hxs.select("//div[@id=\"breadcrumbs\"]/span[3]/a/text()").extract()[0]
         item['developer'] = hxs.select("//div[@class=\"author row\"]/span/a/text()").extract()[0]
-        item['email'] = "noinfo"
-        item['devpage'] = ""
+        item['email'] = None
+        item['devpage'] = None
         item['level'] = hxs.select("//span[@class=\"level\"]/text()").re("\d+")[0]
-        item['price'] = ""
+        item['price'] = None
         items.append(item)
         pass
     except Exception as e :

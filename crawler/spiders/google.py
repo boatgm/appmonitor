@@ -75,20 +75,18 @@ def parse_content(response):
         item['name'] = hxs.select("//h1[@class=\"doc-banner-title\"]/text()").extract()[0]
         item['update_time'] = hxs.select("//time[@itemprop=\"datePublished\"]/text()").extract()[0]
         item['app_version'] = hxs.select("//dd[@itemprop=\"softwareVersion\"]/text()").extract()[0]
-        item['language'] = "cn"
-        item['package_url'] = ""
-        item['package_md5'] = ""
-        item['package_name'] = ""
+        item['language'] = None
+        item['package_url'] = None
+        item['package_name'] = None
         item['size'] = hxs.select("//dd[@itemprop=\"fileSize\"]/text()").extract()[0]
-        item['comment_url'] = ""
+        item['comment_url'] = None
         item['icon'] = hxs.select("//div[@class=\"doc-banner-icon\"]/img/@src").extract()[0]
         item['market'] = "andrmarket"
         item['images'] = hxs.select("//img[@class=\"doc-screenshot-img\"]/@src").extract()
         item['description'] = hxs.select("//div[@id=\"doc-original-text\"]").extract()[0][51:-6:]
-        #item['category_detail'] = UMDict(hxs.select("//dl[@class=\"doc-metadata-list\"]/dd[5]/a/text()").extract()[0])
-        item['category_detail'] = hxs.select("//dl[@class=\"doc-metadata-list\"]/dd[5]/a/text()").extract()[0]
+        item['category'] = hxs.select("//dl[@class=\"doc-metadata-list\"]/dd[5]/a/text()").extract()[0]
         item['developer'] = hxs.select("//td[@class=\"doc-banner-title-container\"]/a/text()").extract()[0]
-        item['email'] = "noinfo"
+        item['email'] = None
         item['devpage'] = "https://play.google.com"+hxs.select("//td[@class=\"doc-banner-title-container\"]/a/@href").extract()[0]
         item['level'] = hxs.select("//div[@class=\"ratings goog-inline-block\"]/@content").extract()[0]
         item['price'] = hxs.select("//dd[@itemprop=\"offers\"]/text()").extract()[0]

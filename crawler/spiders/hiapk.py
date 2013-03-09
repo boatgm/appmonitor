@@ -59,17 +59,13 @@ def parse_content(response):
         item['update_time'] = hxs.select("//label[@id=\"ctl00_AndroidMaster_Content_Apk_SoftPublishTime\"]/text()").extract()[0]
         item['app_version'] = hxs.select("//label[@id=\"ctl00_AndroidMaster_Content_Apk_SoftVersionName\"]/text()").extract()[0]
         item['language'] = hxs.select("//label[@id=\"ctl00_AndroidMaster_Content_Apk_SoftLanguage\"]/text()").extract()[0]
-        
         item['package_url'] = "http://apk.hiapk.com/Download.aspx?aid="+item['app_id']
-        item['package_md5'] = md5(item['package_url']).hexdigest()
-        item['package_name'] = ""
+        item['package_name'] = None
         item['size'] = hxs.select("//label[@id=\"ctl00_AndroidMaster_Content_Apk_SoftSize\"]/text()").extract()[0]
         item['market'] = "hiapk"
         item['images'] = hxs.select("//div[@class=\"screenimg\"]/ul/li/a/img/@src").extract()
         item['description'] = hxs.select("//label[@id=\"ctl00_AndroidMaster_Content_Apk_Description\"]/text()").extract()[0]
-        item['category_general'] = "app" #"game"
-        #item['category_detail'] = UMDict(hxs.select("//label[@id=\"ctl00_AndroidMaster_Content_Apk_SoftCategory\"]/text()").extract()[0])
-        item['category_detail'] = hxs.select("//label[@id=\"ctl00_AndroidMaster_Content_Apk_SoftCategory\"]/text()").extract()[0]
+        item['category'] = hxs.select("//label[@id=\"ctl00_AndroidMaster_Content_Apk_SoftCategory\"]/text()").extract()[0]
         item['level'] = hxs.select("//div[@class=\"star_num\"]/text()").extract()[0]
         items.append(item)
     except Exception as e :

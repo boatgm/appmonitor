@@ -50,7 +50,6 @@ def parse_content(response):
         item['app_version'] = hxs.select("//div[@class=\"detail cf\"]/div[@class=\"disc cutoff\"][1]/text()").re(r"[0-9.]+")[0]
         item['language'] = "cn"
         item['package_url'] = hxs.select("//div[@class=\"download cf\"]/ul/li/a[@class=\"free\"]/@href").re("http://.*\?")[0][0:-1:]
-        item['package_md5'] = md5(item['package_url']).hexdigest()
         item['package_name'] = re.findall(r"[^/]+",item['package_url'])[-1]
         item['size'] = hxs.select("//div[@class=\"detail cf\"]/div[@class=\"disc bold cutoff\"][2]/@title").extract()[0]
         item['comment_url'] = item['url'] + hxs.select("//a[@class=\"linkmore\"]/@href").extract()[0]
@@ -58,14 +57,12 @@ def parse_content(response):
         item['market'] = "appchina"
         item['images'] = hxs.select("//ul[@class=\"screenshoot\"]/li/a/img/@src").extract()
         item['description'] = hxs.select("//p[@id=\"sorh\"]").extract()[0]
-        item['category_general'] = "app" #"game"
-        #item['category_detail'] = UMDict(hxs.select("//div[@class=\"detail cf\"]/div[@class=\"disc bold cutoff\"][3]/@title").extract()[0])
-        item['category_detail'] = hxs.select("//div[@class=\"detail cf\"]/div[@class=\"disc bold cutoff\"][3]/@title").extract()[0]
+        item['category'] = hxs.select("//div[@class=\"detail cf\"]/div[@class=\"disc bold cutoff\"][3]/@title").extract()[0]
         item['developer'] = hxs.select("//div[@class=\"about-author cf\"]/a/text()").extract()[0]
-        item['email'] = "noinfo"
-        item['devpage'] = "noinfo"
+        item['email'] = None
+        item['devpage'] = None
         item['level'] = hxs.select("//div[@class=\"result-mark\"]/p/text()").re("[0-9.]+")[0]
-        item['price'] = ""
+        item['price'] = None
         items.append(item)
         pass
     except Exception as e :

@@ -65,7 +65,6 @@ def parse_content(response):
         item['app_version'] = hxs.select("//title/text()").re(r"V[0-9.]*")[0][1::]
         item['language'] = "cn"
         item['package_url'] = hxs.select("//div[@class=\"down-btns\"]/a[1]/@href").re(r"^[^?]*apk")[0]
-        item['package_md5'] = md5(item['package_url']).hexdigest()
         item['package_name'] = re.findall(r"[^/]*\.apk",item['package_url'])[0]
         item['size'] = hxs.select("//table[@class=\"summary\"]/tr[1]/td[2]/text()").extract()[0]
         item['comment_url'] = "http://www.waptw.com/sonyericsson/x11/comment/"+item['app_id']
@@ -73,13 +72,11 @@ def parse_content(response):
         item['market'] = "waptw"
         item['images'] = hxs.select("//div[@class=\"imgbox\"]/img/@src").extract()
         item['description'] = hxs.select("//div[@class=\"G-panel\"]/p").extract()[0]
-        item['category_general'] = "app" #"game"
-        #item['category_detail'] = UMDict(hxs.select("//div[@class=\"crumbs\"]/a[2]/text()").extract()[0])
-        item['category_detail'] = hxs.select("//div[@class=\"crumbs\"]/a[2]/text()").extract()[0]
-        item['developer'] = "noinfo"
-        item['email'] = "noinfo"
-        item['devpage'] = "noinfo"
-        item['level'] = ""
+        item['category'] = hxs.select("//div[@class=\"crumbs\"]/a[2]/text()").extract()[0]
+        item['developer'] = None
+        item['email'] = None
+        item['devpage'] = None
+        item['level'] = None
         item['price'] = hxs.select("//table[@class=\"summary\"]/tr[4]/td[1]/p/text()").extract()[0]
         items.append(item)
     except Exception as e :

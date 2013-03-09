@@ -13,11 +13,11 @@ from crawler.items import *
 from crawler.urls import geturls
 
 class Spider(CrawlSpider):
-    name = '360'
+    name = 'zhushou'
     start_urls = [
             'http://zhushou.360.cn/',
-            #'http://zhushou.360.cn/list/index/cid/1/size/all/lang/all/order/download/?page=1',
-            #'http://zhushou.360.cn/list/index/cid/2/size/all/lang/all/order/download/?page=1',
+            'http://zhushou.360.cn/list/index/cid/1/size/all/lang/all/order/download/?page=1',
+            'http://zhushou.360.cn/list/index/cid/2/size/all/lang/all/order/download/?page=1',
             ]
     def parse(self, response):
         items = []
@@ -100,7 +100,6 @@ def parse_content(response):
         item['update_time'] = hxs.select("//dl[@class=\"clearfix\"]//dd[2]/p[3]/text()").re("[0-9-]+")[0]
         item['app_version'] = hxs.select("//div[@class=\"nstxt\"]/table/tr[1]/td[2]/text()").extract()[0][3::]
         item['package_url'] = hxs.select("//script[1]/text()").re(r"downurl':'[^']*")[0][10::]
-        item['package_md5'] = md5(item['package_url']).hexdigest()
         item['size'] = hxs.select("//script/text()").re(r"size':'[^']*")[0][7::]
         item['comment_url'] = "http://intf.baike.360.cn/index.php?c=message&a=getmessage&name="+item['name']
         item['icon'] = hxs.select("//dl[@class=\"clearfix\"]/dt/img/@src").extract()[0]

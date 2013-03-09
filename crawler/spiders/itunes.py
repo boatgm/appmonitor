@@ -21,7 +21,7 @@ from crawler.items import *
 
 class Spider(CrawlSpider):
     """ General configuration of the Crawl Spider """
-    name = 'iTunes'
+    name = 'itunes'
     start_urls = [
         'https://itunes.apple.com/cn/genre/ios-gong-ju/id6002?mt=8',
         'https://itunes.apple.com/cn/genre/ios-you-xi/id6014?mt=8',
@@ -32,7 +32,7 @@ class Spider(CrawlSpider):
 
     def parse(self,response):
         items = []
-        #items+=parse_content_links(response)
+        items+=parse_content_links(response)
         if re.match(ur'.*/cn/app/id\d+.*mt=8',response.url):
             items+=parse_content(response)
 
@@ -83,7 +83,6 @@ def parse_content(response):
         item['app_version'] = hxs.select("//div[@id=\"left-stack\"]//li[4]/text()").extract()[0]
         item['language'] = hxs.select("//li[@class=\"language\"]/text()").extract()[0]
         item['package_url'] = ""
-        item['package_md5'] = ""
         item['package_name'] = ""
         item['size'] = hxs.select("//ul[@class=\"list\"]/li[5]/text()").extract()[0]
         item['comment_url'] = ""
@@ -91,8 +90,7 @@ def parse_content(response):
         item['market'] = "itunes"
         item['images'] = hxs.select("//img[@class=\"portrait\"]/@src").extract()
         item['description'] = hxs.select("//div[@class=\"product-review\"]/p").extract()[0]
-        item['category_general'] = "app" #"game"
-        item['category_detail'] = hxs.select("//ul[@class=\"list\"]/li[@class=\"genre\"]/a/text()").extract()[0]
+        item['category'] = hxs.select("//ul[@class=\"list\"]/li[@class=\"genre\"]/a/text()").extract()[0]
         item['developer'] = hxs.select("//ul[@class=\"list\"]/li[7]/text()").extract()[0]
         item['email'] = "noinfo"
         item['devpage'] = hxs.select("//div[@class=\"app-links\"]/a/@href").extract()[0]

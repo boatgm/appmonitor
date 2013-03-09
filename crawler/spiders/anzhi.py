@@ -67,17 +67,14 @@ def parse_content(response):
         item['app_version'] = hxs.select("//div[@class=\"titleline\"][1]/text()").re(r"[0-9.]+")[0]
         item['language'] = "cn"
         item['package_url'] = hxs.select("//div[@id=\"op_left\"]/a[1]/@href").extract()[0]
-        item['package_md5'] = md5(item['package_url']).hexdigest()
-        item['package_name'] = ""
+        item['package_name'] = None
         item['size'] = hxs.select("//div[@class=\"titleline\"][3]/span[2]/text()").extract()[0][3::]
         item['comment_url'] = "http://www.anzhi.com"+ hxs.select("//script[3]/text()").re("/comment.*\"")[0][0:-7:]
         item['icon'] = hxs.select("//div[@class=\"d_img l\"]/img/@src").extract()[0]
         item['market'] = "anzhi"
         item['images'] = hxs.select("//div[@class=\"imgoutbox\"]/ul/li/img/@src").extract()
         item['description'] = hxs.select("//div[@class=\"des\"]/p").extract()[0]
-        item['category_general'] = "app" #"game"
-        #item['category_detail'] = UMDict(hxs.select("//div[@class=\"titleline\"][2]/span[2]/text()").extract()[0][3::])
-        item['category_detail'] = hxs.select("//div[@class=\"titleline\"][2]/span[2]/text()").extract()[0][3::]
+        item['category'] = hxs.select("//div[@class=\"titleline\"][2]/span[2]/text()").extract()[0][3::]
         item['developer'] = hxs.select("//div[@class=\"titleline\"][2]/span[1]/text()").extract()[0][3::]
         item['email'] = None
         item['devpage'] = None

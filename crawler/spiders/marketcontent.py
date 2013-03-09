@@ -11,36 +11,42 @@ from scrapy.conf import settings
 from scrapy.http import Request
 from crawler.items import ApkItem,MetaItem,CommentItem,LinkItem
 from crawler.urls import contenturls
-from crawler.spiders import itunes,zhushou,waptw,anzhi,hiapk,google
+from crawler.spiders import itunes,zhushou,waptw,anzhi,hiapk,google,nduoa
 
 class Spider(CrawlSpider):
     name = 'marketcontent'
     start_urls =[
-            #'https://itunes.apple.com/cn/app/id553749400',
-            #'http://zhushou.360.cn/detail/index/soft_id/199152',
+            'https://itunes.apple.com/cn/app/id553749400',
+            'http://zhushou.360.cn/detail/index/soft_id/199152',
             'http://www.baidu.com/',
-            #'http://www.waptw.com/soft/33627.html',
+            'http://www.waptw.com/soft/33627.html',
             ]
     #start_urls = []
-    is_start = True
+    is_start = False
 
     def parse(self,response):
         items = []
-        #if re.match(ur".*itunes\.apple\.com.*",response.url):
-            #items+=itunes.parse_content_links(response)
-        #    items+=itunes.parse_content(response)
+        if re.match(ur".*itunes\.apple\.com.*",response.url):
+            items+=itunes.parse_content_links(response)
+            items+=itunes.parse_content(response)
         if re.match(ur".*zhushou\.360\.cn.*",response.url):
             items+=zhushou.parse_content_links(response)
             items+=zhushou.parse_content(response)
         elif re.match(ur".*waptw\.com.*",response.url):
             items+=waptw.parse_content_links(response)
             items+=waptw.parse_content(response)
-        #elif re.match(ur".*anzhi\.com.*",response.url):
-            #items+=anzhi.parse_content_links(response)
-        #    items+=anzhi.parse_content(response)
-        #elif re.match(ur".*google\.com.*",response.url):
-            #items+=google.parse_content_links(response)
-        #    items+=google.parse_content(response)
+        elif re.match(ur".*anzhi\.com.*",response.url):
+            items+=anzhi.parse_content_links(response)
+            items+=anzhi.parse_content(response)
+        elif re.match(ur".*google\.com.*",response.url):
+            items+=google.parse_content_links(response)
+            items+=google.parse_content(response)
+        elif re.match(ur".*nduoa\.com.*",response.url):
+            items+=nduoa.parse_content_links(response)
+            items+=nduoa.parse_content(response)
+        elif re.match(ur".*hiapk\.com.*",response.url):
+            items+=hiapk.parse_content_links(response)
+            items+=hiapk.parse_content(response)
 
         if self.is_start :
             self.is_start = False
