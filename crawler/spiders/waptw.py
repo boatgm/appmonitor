@@ -80,7 +80,13 @@ def parse_content(response):
         item['price'] = hxs.select("//table[@class=\"summary\"]/tr[4]/td[1]/p/text()").extract()[0]
         items.append(item)
     except Exception as e :
-        print e
+        Error = ErrorItem()
+        Error['md5'] = item['md5']
+        Error['market'] = item['market']
+        Error['itemtype'] = 'meta'
+        Error['info'] = str(e)
+        Error['traceback'] = traceback.format_exc()
+        items.append(Error)
     return items
 
 
@@ -100,11 +106,17 @@ def parse_update(response):
     hxs = HtmlXPathSelector(response)
     try:
         item = UpdateItem()
+        item['market'] = "waptw"
         item['md5'] = md5(response.url).hexdigest()
         item['url'] = response.url
         item['down'] = int(hxs.select("//table[@class=\"summary\"]/tr[2]/td[1]/text()").extract()[0])
-        item['market'] = "waptw"
         items.append(item)
     except Exception as e :
-        print e
+        Error = ErrorItem()
+        Error['md5'] = item['md5']
+        Error['market'] = item['market']
+        Error['itemtype'] = 'meta'
+        Error['info'] = str(e)
+        Error['traceback'] = traceback.format_exc()
+        items.append(Error)
     return items

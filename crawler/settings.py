@@ -17,7 +17,7 @@ USER_AGENT_LIST = [
     ]
 
 DEFAULT_ITEM_CLASS = 'crawler.items.CrawlerItem'
-ITEM_PIPELINES = ['crawler.pipelines_um.mongo_storage',]
+ITEM_PIPELINES = ['crawler.pipelines.mongo_storage',]
 EXTENSIONS = {
     'scrapy.contrib.corestats.CoreStats': 500,
     'crawler.statstodb.StatsToMongo': 1000,
@@ -32,13 +32,6 @@ REDIRECT_MAX_TIMES =0
 
 MONGODB = {'host':'localhost','port':27017,'name':'app'}
 MYSQLDB = {'host':'localhost','port':27017,'name':'app','user':'root','pwd':'root'}
-
-MAIL_DEBUG = False
-MAIL_HOST = 'mail.google.com'
-MAIL_PORT = 25
-MAIL_FROM = 'gongming@umeng.com'
-MAIL_PASS = 'umeng123'
-MAIL_USER = 'gongming@umeng.com'
 
 COOKIES_ENABLED = True
 DNSCACHE_ENABLED = True

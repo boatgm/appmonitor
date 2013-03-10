@@ -80,7 +80,7 @@ def parse_rankpage(response):
             item ['url'] = "http://zhushou.360.cn"+app.select("a/@href").re(r"/detail/.*")[0]
             item ['md5'] = md5(item['url']).hexdigest()
             item ['down'] = int(app.select("span/text()").re("\d+")[0])
-            item ['market'] = "360"
+            item ['market'] = "zhushou"
             items.append(item)
         except Exception as e:
             print e
@@ -94,7 +94,7 @@ def parse_content(response):
         item = MetaItem()
         item['md5'] = md5(response.url).hexdigest()
         item['url'] = response.url
-        item['market'] = "360"
+        item['market'] = "zhushou"
         item['app_id'] = re.findall(r"\d+",response.url)[-1]
         item['name'] = hxs.select("//script[2]/text()").re("baike_name\":\"[^ \"]*")[0][13::]
         item['update_time'] = hxs.select("//dl[@class=\"clearfix\"]//dd[2]/p[3]/text()").re("[0-9-]+")[0]
@@ -105,8 +105,6 @@ def parse_content(response):
         item['icon'] = hxs.select("//dl[@class=\"clearfix\"]/dt/img/@src").extract()[0]
         item['images'] = hxs.select("//div[@class=\"overview\"]/img/@src").extract()
         item['description'] = hxs.select("//div[@class=\"alldesc\"]/text()").extract()[0]
-        item['category_general'] = "app" #"game"
-        item['category_detail'] = hxs.select("//div[@class=\"nstxt\"]/table/tr[2]/td[2]/text()").extract()[0][3::].split(".")[0]
         item['category'] = hxs.select("//div[@class=\"nstxt\"]/table/tr[2]/td[2]/text()").extract()[0][3::].replace(".","")
         item['developer'] = hxs.select("//div[@class=\"nstxt\"]/table/tr[2]/td[3]/text()").extract()[0][3::]
         item['email'] = None

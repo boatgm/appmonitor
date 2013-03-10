@@ -1,12 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-#========================================================================
-#   FileName: NduoaIndexSpider.py
-#     Author: gongming
-#      Email: gongming@umeng.com
-#   HomePage: http://umeng.com
-# LastChange: 2013-01-20 16:38:58
-#========================================================================
 
 import re
 import urlparse
@@ -50,6 +43,7 @@ def parse_content(response):
     hxs = HtmlXPathSelector(response)
     try:
         item = MetaItem()
+        item['market'] = "nduoa"
         item['md5'] = md5(response.url).hexdigest()
         item['url'] = response.url
         item['app_id'] = re.findall(r"\d+",response.url)[-1]
@@ -62,7 +56,6 @@ def parse_content(response):
         item['size'] = hxs.select("//div[@class=\"size row\"]/text()").extract()[0][3::]
         item['comment_url'] = None
         item['icon'] = hxs.select("//div[@class=\"icon\"]/img/@src").extract()[0]
-        item['market'] = "nduoa"
         item['images'] = hxs.select("//ul[@class=\"shotbox\"]/li/img/@src").extract()
         item['description'] =  "".join(hxs.select("//div[@class=\"inner\"]/p").extract())
         item['category'] = hxs.select("//div[@id=\"breadcrumbs\"]/span[3]/a/text()").extract()[0]
@@ -72,7 +65,12 @@ def parse_content(response):
         item['level'] = hxs.select("//span[@class=\"level\"]/text()").re("\d+")[0]
         item['price'] = None
         items.append(item)
-        pass
     except Exception as e :
-        print e
+        Error = ErrorItem()
+        Error['md5'] = item['md5']
+        Error['market'] = item['market']
+        Error['itemtype'] = 'meta'
+        Error['info'] = str(e)
+        Error['traceback'] = traceback.format_exc()
+        items.append(Error)
     return items

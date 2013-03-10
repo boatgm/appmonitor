@@ -81,11 +81,14 @@ def parse_content(response):
         item['level'] = None
         item['price'] = None
         items.append(item)
-        pass
     except Exception as e :
-        print e
-        pass
-
+        Error = ErrorItem()
+        Error['md5'] = item['md5']
+        Error['market'] = item['market']
+        Error['itemtype'] = 'meta'
+        Error['info'] = str(e)
+        Error['traceback'] = traceback.format_exc()
+        items.append(Error)
     return items
 
 def parse_rankpage(self, response):

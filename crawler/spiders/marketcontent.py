@@ -16,13 +16,13 @@ from crawler.spiders import itunes,zhushou,waptw,anzhi,hiapk,google,nduoa
 class Spider(CrawlSpider):
     name = 'marketcontent'
     start_urls =[
-            'https://itunes.apple.com/cn/app/id553749400',
-            'http://zhushou.360.cn/detail/index/soft_id/199152',
+            #'https://itunes.apple.com/cn/app/id553749400',
+            #'http://zhushou.360.cn/detail/index/soft_id/199152',
             'http://www.baidu.com/',
-            'http://www.waptw.com/soft/33627.html',
+            #'http://www.waptw.com/soft/33627.html',
             ]
     #start_urls = []
-    is_start = False
+    is_start = True
 
     def parse(self,response):
         items = []

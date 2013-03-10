@@ -1,13 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-#========================================================================
-#   FileName: AnzhiIndexSpider
-#     Author: gongming
-#      Email: gongming@umeng.com
-#   HomePage: http://umeng.com
-# LastChange: 2012-12-27 16:43:27
-#========================================================================
-
 import re
 import urlparse
 from md5 import md5
@@ -26,11 +18,11 @@ class Spider(CrawlSpider):
     start_urls = [
             'https://play.google.com/store/apps/details?id=com.tencent.mobileqq',
             'https://play.google.com/store/apps/details?id=com.droidappsolutions.fingerprintscanner',
-            'https://play.google.com/store/apps/category/CASUAL?feature=category-nav',
+            #'https://play.google.com/store/apps/category/CASUAL?feature=category-nav',
             #'https://play.google.com/store/apps/category/GAME_WALLPAPER/collection/topselling_free?start=24&num=24',
             #'https://play.google.com/store/apps/category/CASUAL/collection/topselling_free?start=24&num=24',
-            'https://play.google.com/store/apps/category/APPLICATION/collection/topselling_free?start=0&num=24',
-            'https://play.google.com/store/apps/category/GAME/collection/topselling_free?start=0&num=24',
+            #'https://play.google.com/store/apps/category/APPLICATION/collection/topselling_free?start=0&num=24',
+            #'https://play.google.com/store/apps/category/GAME/collection/topselling_free?start=0&num=24',
             ]
     def parse(self, response):
         items = []
@@ -60,7 +52,7 @@ def parse_content_links(response):
         item = LinkItem()
         item['url'] = "https://play.google.com"+url
         item['md5'] = md5(item['url']).hexdigest()
-        item['market'] = "andrmarket"
+        item['market'] = "google"
         items.append(item)
     return items
 
@@ -69,6 +61,7 @@ def parse_content(response):
     hxs = HtmlXPathSelector(response)
     try:
         item = MetaItem()
+        item['market'] = "google"
         item['md5'] = md5(response.url).hexdigest()
         item['url'] = response.url
         item['app_id'] = re.findall(r"[^=?&]+",response.url)[-1]
@@ -91,8 +84,12 @@ def parse_content(response):
         item['level'] = hxs.select("//div[@class=\"ratings goog-inline-block\"]/@content").extract()[0]
         item['price'] = hxs.select("//dd[@itemprop=\"offers\"]/text()").extract()[0]
         items.append(item)
-        pass
     except Exception as e :
-        print e
-        pass
+        error = ErrorItem()
+        error['market'] = "google"
+        error['md5'] = item['md5'] 
+        error['info'] = str(e)
+        error['itemtype'] = "meta" 
+        error['traceback'] = traceback.format_exc()
+        items.append(error)
     return items
