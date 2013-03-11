@@ -63,7 +63,7 @@ def parse_content_links(response):
             item = LinkItem()
             item ['url'] = "http://zhushou.360.cn"+url
             item ['md5'] = md5(item['url']).hexdigest()
-            item ['market'] = "360"
+            item ['market'] = "zhushou"
             items.append(item)
         except Exception as e:
             print e

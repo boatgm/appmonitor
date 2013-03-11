@@ -52,7 +52,13 @@ class mongo_storage(object):
                     {"$addToSet":{"unknown_catagory":item['category']}},True)
 
         self.db.appmeta.update({'md5':item['md5']},
-                {"$set":dict(item).update({"avaiable":1})},True)
+                {"$set":dict(item)},True)
+
+        self.db.appmeta.update({'md5':item['md5']},
+                {"$set":{"avaiable":1}},True)
+
+        self.db.market.update({'market':item['market']},
+                {"$inc":{"content."+self.date : 1}},True)
 
     def process_comment_item(self,item):
         self.db.appmeta.update({'md5':item['md5']},
@@ -66,6 +72,8 @@ class mongo_storage(object):
     def process_link_item(self,item):
         if not self.db.appmeta.find_one({'md5':item['md5']}):
             self.db.appmeta.insert(dict(item))
+            self.db.market.update({'market':item['market']},
+                    {"$inc":{"LinkItem."+self.date : 1}},True)
 
     def process_update_item(self,item):
         """ update item`s download number"""

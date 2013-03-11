@@ -39,7 +39,7 @@ class Spider(CrawlSpider):
             items+=anzhi.parse_content_links(response)
             items+=anzhi.parse_content(response)
         elif re.match(ur".*google\.com.*",response.url):
-            items+=google.parse_content_links(response)
+            #items+=google.parse_content_links(response)
             items+=google.parse_content(response)
         elif re.match(ur".*nduoa\.com.*",response.url):
             items+=nduoa.parse_content_links(response)

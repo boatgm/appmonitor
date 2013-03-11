@@ -74,7 +74,6 @@ def parse_content(response):
         item['size'] = hxs.select("//dd[@itemprop=\"fileSize\"]/text()").extract()[0]
         item['comment_url'] = None
         item['icon'] = hxs.select("//div[@class=\"doc-banner-icon\"]/img/@src").extract()[0]
-        item['market'] = "andrmarket"
         item['images'] = hxs.select("//img[@class=\"doc-screenshot-img\"]/@src").extract()
         item['description'] = hxs.select("//div[@id=\"doc-original-text\"]").extract()[0][51:-6:]
         item['category'] = hxs.select("//dl[@class=\"doc-metadata-list\"]/dd[5]/a/text()").extract()[0]
