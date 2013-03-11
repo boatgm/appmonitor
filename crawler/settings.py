@@ -28,7 +28,7 @@ DOWNLOADER_MIDDLEWARES = {
 #    'scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware': None,
     }
 REDIRECT_ENABLED = False
-REDIRECT_MAX_TIMES =0 
+REDIRECT_MAX_TIMES = 0 
 
 MONGODB = {'host':'localhost','port':27017,'name':'app'}
 MYSQLDB = {'host':'localhost','port':27017,'name':'app','user':'root','pwd':'root'}

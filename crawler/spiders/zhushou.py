@@ -88,13 +88,25 @@ def parse_rankpage(response):
     return items
 
 def parse_content(response):
+    """
+    "http://zhushou.360.cn/index/gettips/sid/215356"
+    '{
+    "soft_id":"215356",
+    "soft_name":"\u8fa9\u8bba\u8d5b\u8ba1\u65f6\u5668",
+    "vote_scores":"6",
+    "apk_sizes":"913KB",
+    "download_times":"151",
+    "soft_brief":"\u8be5\u5e94\u7528\u6839\u636e\u8fa9\u8bba\u8d5b\u8d5b\u7a0b\u5b89\u6392,\u901a\u8fc7\u5012\u8ba1\u65f6\u7684\u65b9\u5f0f\u7cbe\u786e\u7684\u638c\u63e1\u8d5b\u7a0b\u8fdb\u5ea6\u3002\u662f\u76ee\u524d\u5b89\u5353\u5e02\u573a\u4e0a\u552f\u4e00...",
+    "category_name":"\u751f\u6d3b.\u5730\u56fe"
+    }'
+    """
     items = []
     hxs = HtmlXPathSelector(response)
     try:
         item = MetaItem()
+        item['market'] = "zhushou"
         item['md5'] = md5(response.url).hexdigest()
         item['url'] = response.url
-        item['market'] = "zhushou"
         item['app_id'] = re.findall(r"\d+",response.url)[-1]
         item['name'] = hxs.select("//script[2]/text()").re("baike_name\":\"[^ \"]*")[0][13::]
         item['update_time'] = hxs.select("//dl[@class=\"clearfix\"]//dd[2]/p[3]/text()").re("[0-9-]+")[0]

@@ -45,7 +45,8 @@ class mongo_storage(object):
         else:
             item["language"] = "en"
         try:
-            item['category_detail'] = UMDict[str(item['categroy'])[0:2]]
+            #item['category_detail'] = UMDict[str(item['categroy'])]
+            pass
         except Exception as e:
             self.db.exceptions.update({"market":item['market'],"date":self.date},
                     {"$addToSet":{"unknown_catagory":item['category']}},True)
