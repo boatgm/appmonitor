@@ -1,12 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-#========================================================================
-#   FileName: datastatus.py
-#     Author: gongming
-#      Email: gongming@umeng.com
-#   HomePage: http://umeng.com
-# LastChange: 2013-01-18 12:06:27
-#========================================================================
 import pymongo
 import time
 #from crawl import settings
