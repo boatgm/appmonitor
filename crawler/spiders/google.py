@@ -70,7 +70,7 @@ def parse_content(response):
         item['app_version'] = hxs.select("//dd[@itemprop=\"softwareVersion\"]/text()").extract()[0]
         item['language'] = None
         item['package_url'] = None
-        item['package_name'] = None
+        item['package_name'] = item['app_id']
         item['size'] = hxs.select("//dd[@itemprop=\"fileSize\"]/text()").extract()[0]
         item['comment_url'] = None
         item['icon'] = hxs.select("//div[@class=\"doc-banner-icon\"]/img/@src").extract()[0]
@@ -85,7 +85,7 @@ def parse_content(response):
         items.append(item)
     except Exception as e :
         error = ErrorItem()
-        error['market'] = "google"
+        error['market'] = item['market']
         error['md5'] = item['md5'] 
         error['info'] = str(e)
         error['itemtype'] = "meta" 

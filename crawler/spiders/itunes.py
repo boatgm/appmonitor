@@ -71,6 +71,7 @@ def parse_content(response):
     hxs = HtmlXPathSelector(response)
     try:
         item = MetaItem()
+        item['market'] = "itunes"
         item['md5'] = md5(response.url).hexdigest()
         item['url'] = response.url
         item['app_id'] = re.findall(r"\d+",response.url)[-1]
@@ -83,7 +84,6 @@ def parse_content(response):
         item['size'] = hxs.select("//ul[@class=\"list\"]/li[5]/text()").extract()[0]
         item['comment_url'] = None
         item['icon'] = hxs.select("//div[@class=\"artwork\"]/img/@src").extract()[0]
-        item['market'] = "itunes"
         item['images'] = hxs.select("//img[@class=\"portrait\"]/@src").extract()
         item['description'] = hxs.select("//div[@class=\"product-review\"]/p").extract()[0]
         item['category'] = hxs.select("//ul[@class=\"list\"]/li[@class=\"genre\"]/a/text()").extract()[0]

@@ -50,7 +50,6 @@ def parse_content(response):
         item['name'] = hxs.select("//div[@class=\"name\"]/span[@class=\"title\"]/text()").extract()[0]
         item['update_time'] = hxs.select("//div[@class=\"updateTime row\"]/em/text()").extract()[0]
         item['app_version'] = hxs.select("//div[@class=\"name\"]/span[@class=\"version\"]/text()").re(r"[0-9.]+")[0]
-        item['language'] = "cn"
         item['package_url'] = "http://www.nduoa.com"+hxs.select("//a[@class=\"d_pc_normal\"]/@href").extract()[0]
         item['package_name'] = None
         item['size'] = hxs.select("//div[@class=\"size row\"]/text()").extract()[0][3::]

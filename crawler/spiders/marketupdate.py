@@ -27,9 +27,9 @@ class Spider(CrawlSpider):
     is_start = True
     def parse(self,response):
         items = []
-        #if re.match(ur".*itunes\.apple\.com.*",response.url):
-            #items+=itunes.parse_content_links(response)
-        #    items+=itunes.parse_content(response)
+        if re.match(ur".*itunes\.apple\.com.*",response.url):
+            items+=itunes.parse_content_links(response)
+            items+=itunes.parse_update(response)
         if re.match(ur".*zhushou\.360\.cn.*",response.url):
             #items+=zhushou.parse_content_links(response)
             items+=zhushou.parse_rankpage(response)

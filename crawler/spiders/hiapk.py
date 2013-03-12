@@ -52,6 +52,7 @@ def parse_content(response):
     hxs = HtmlXPathSelector(response)
     try:
         item = MetaItem()
+        item['market'] = "hiapk"
         item['md5'] = md5(response.url).hexdigest()
         item['url'] = response.url
         item['app_id'] = re.findall(r"\d+",response.url)[-1]
@@ -62,15 +63,19 @@ def parse_content(response):
         item['package_url'] = "http://apk.hiapk.com/Download.aspx?aid="+item['app_id']
         item['package_name'] = None
         item['size'] = hxs.select("//label[@id=\"ctl00_AndroidMaster_Content_Apk_SoftSize\"]/text()").extract()[0]
-        item['market'] = "hiapk"
         item['images'] = hxs.select("//div[@class=\"screenimg\"]/ul/li/a/img/@src").extract()
         item['description'] = hxs.select("//label[@id=\"ctl00_AndroidMaster_Content_Apk_Description\"]/text()").extract()[0]
         item['category'] = hxs.select("//label[@id=\"ctl00_AndroidMaster_Content_Apk_SoftCategory\"]/text()").extract()[0]
         item['level'] = hxs.select("//div[@class=\"star_num\"]/text()").extract()[0]
         items.append(item)
     except Exception as e :
-        print e
-
+        error = ErrorItem()
+        error['market'] = item['market']
+        error['md5'] = item['md5'] 
+        error['info'] = str(e)
+        error['itemtype'] = "meta" 
+        error['traceback'] = traceback.format_exc()
+        items.append(error)
     return items
 
 def parse_update(response):
@@ -78,12 +83,18 @@ def parse_update(response):
     hxs = HtmlXPathSelector(response)
     try:
         item = UpdateItem()
+        item['market'] = "hiapk"
         item['md5'] = md5(response.url).hexdigest()
         item['url'] = response.url
         item['down'] = int(hxs.select("//label[@id=\"ctl00_AndroidMaster_Content_Apk_Download\"]/text()").extract()[0])
-        item['market'] = "hiapk"
         items.append(item)
     except Exception as e :
-        print e
+        error = ErrorItem()
+        error['market'] = item['market']
+        error['md5'] = item['md5'] 
+        error['info'] = str(e)
+        error['itemtype'] = "update" 
+        error['traceback'] = traceback.format_exc()
+        items.append(error)
     return items
 

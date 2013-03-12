@@ -57,19 +57,18 @@ def parse_content(response):
     hxs = HtmlXPathSelector(response)
     try:
         item = MetaItem()
+        item['market'] = "waptw"
         item['md5'] = md5(response.url).hexdigest()
         item['url'] = response.url
         item['app_id'] = re.findall(r"\d+",response.url)[-1]
         item['name'] = hxs.select("//title/text()").re(r"^.*V")[0][0:-1:]
         item['update_time'] = hxs.select("//table[@class=\"summary\"]/tr[1]/td[1]/text()").re("[0-9-]+")[0]
         item['app_version'] = hxs.select("//title/text()").re(r"V[0-9.]*")[0][1::]
-        item['language'] = "cn"
         item['package_url'] = hxs.select("//div[@class=\"down-btns\"]/a[1]/@href").re(r"^[^?]*apk")[0]
         item['package_name'] = re.findall(r"[^/]*\.apk",item['package_url'])[0]
         item['size'] = hxs.select("//table[@class=\"summary\"]/tr[1]/td[2]/text()").extract()[0]
         item['comment_url'] = "http://www.waptw.com/sonyericsson/x11/comment/"+item['app_id']
         item['icon'] = hxs.select("//div[@class=\"imgbox\"]/img/@src").extract()[0]
-        item['market'] = "waptw"
         item['images'] = hxs.select("//div[@class=\"imgbox\"]/img/@src").extract()
         item['description'] = hxs.select("//div[@class=\"G-panel\"]/p").extract()[0]
         item['category'] = hxs.select("//div[@class=\"crumbs\"]/a[2]/text()").extract()[0]
@@ -96,10 +95,8 @@ def parse_index(response):
     item = MarketItem()
     item ['name'] = "waptw"
     item ['appsum'] = int(hxs.select("//li[@class=\"total\"]/em/text()").extract()[0])
-
     items.append(item)
     return items
-
 
 def parse_update(response):
     items = []
@@ -115,7 +112,7 @@ def parse_update(response):
         Error = ErrorItem()
         Error['md5'] = item['md5']
         Error['market'] = item['market']
-        Error['itemtype'] = 'meta'
+        Error['itemtype'] = 'update'
         Error['info'] = str(e)
         Error['traceback'] = traceback.format_exc()
         items.append(Error)

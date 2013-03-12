@@ -61,13 +61,18 @@ def parse_content_links(response):
     for url in hxs.select("//a/@href").re(r"/detail/.*"):
         try:
             item = LinkItem()
+            item ['market'] = "zhushou"
             item ['url'] = "http://zhushou.360.cn"+url
             item ['md5'] = md5(item['url']).hexdigest()
-            item ['market'] = "zhushou"
             items.append(item)
         except Exception as e:
-            print e
-            pass
+            Error = ErrorItem()
+            Error['md5'] = item['md5']
+            Error['market'] = item['market']
+            Error['itemtype'] = 'link'
+            Error['info'] = str(e)
+            Error['traceback'] = traceback.format_exc()
+            items.append(Error)
     return items
 
 def parse_rankpage(response):
@@ -77,14 +82,19 @@ def parse_rankpage(response):
     for app in applist:
         try:
             item = UpdateItem()
+            item ['market'] = "zhushou"
             item ['url'] = "http://zhushou.360.cn"+app.select("a/@href").re(r"/detail/.*")[0]
             item ['md5'] = md5(item['url']).hexdigest()
             item ['down'] = int(app.select("span/text()").re("\d+")[0])
-            item ['market'] = "zhushou"
             items.append(item)
         except Exception as e:
-            print e
-            pass
+            Error = ErrorItem()
+            Error['md5'] = item['md5']
+            Error['market'] = item['market']
+            Error['itemtype'] = 'update'
+            Error['info'] = str(e)
+            Error['traceback'] = traceback.format_exc()
+            items.append(Error)
     return items
 
 def parse_content(response):
@@ -146,5 +156,11 @@ def parse_comment(response):
             item['username'] = t['username']
             items.append(item)
     except Exception as e :
-        print e
+        Error = ErrorItem()
+        Error['md5'] = item['md5']
+        Error['market'] = item['market']
+        Error['itemtype'] = 'comment'
+        Error['info'] = str(e)
+        Error['traceback'] = traceback.format_exc()
+        items.append(Error)
     return items
