@@ -10,7 +10,7 @@ from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.selector import HtmlXPathSelector
 from scrapy.http import Request
 from scrapy.conf import settings
-from crawler.items import ApkItem,MetaItem,CommentItem,LinkItem
+from crawler.items import *
 from crawler.urls import geturls
 
 class Spider(CrawlSpider):

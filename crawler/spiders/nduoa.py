@@ -10,7 +10,7 @@ from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.selector import HtmlXPathSelector
 from scrapy.conf import settings
-from crawler.items import ApkItem,MetaItem,CommentItem,LinkItem
+from crawler.items import *
 
 class Spider(CrawlSpider):
     """ General configuration of the Crawl Spider """
