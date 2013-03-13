@@ -3,6 +3,7 @@
 
 import re
 import urlparse
+import traceback
 from md5 import md5
 
 from scrapy.contrib.spiders import CrawlSpider, Rule
