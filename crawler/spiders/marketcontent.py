@@ -11,7 +11,7 @@ from scrapy.conf import settings
 from scrapy.http import Request
 from crawler.items import *
 from crawler.urls import contenturls
-from crawler.spiders import itunes,zhushou,waptw,anzhi,hiapk,google,nduoa
+from crawler.spiders import itunes,zhushou,waptw,anzhi,hiapk,google,nduoa,appchina
 
 class Spider(CrawlSpider):
     name = 'marketcontent'
@@ -35,18 +35,21 @@ class Spider(CrawlSpider):
         elif re.match(ur".*waptw\.com.*",response.url):
             items+=waptw.parse_content_links(response)
             items+=waptw.parse_content(response)
-        elif re.match(ur".*anzhi\.com.*",response.url):
-            items+=anzhi.parse_content_links(response)
-            items+=anzhi.parse_content(response)
+        #elif re.match(ur".*anzhi\.com.*",response.url):
+        #    items+=anzhi.parse_content_links(response)
+        #    items+=anzhi.parse_content(response)
         elif re.match(ur".*google\.com.*",response.url):
-            #items+=google.parse_content_links(response)
+            items+=google.parse_content_links(response)
             items+=google.parse_content(response)
         elif re.match(ur".*nduoa\.com.*",response.url):
             items+=nduoa.parse_content_links(response)
             items+=nduoa.parse_content(response)
-        elif re.match(ur".*hiapk\.com.*",response.url):
-            items+=hiapk.parse_content_links(response)
-            items+=hiapk.parse_content(response)
+        #elif re.match(ur".*hiapk\.com.*",response.url):
+        #    items+=hiapk.parse_content_links(response)
+        #    items+=hiapk.parse_content(response)
+        #elif re.match(ur".*appchina\.com.*",response.url):
+        #    items+=appchina.parse_content_links(response)
+        #    items+=appchina.parse_content(response)
 
         if self.is_start :
             self.is_start = False

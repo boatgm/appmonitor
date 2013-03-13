@@ -15,9 +15,10 @@ from crawler.urls import geturls
 class Spider(CrawlSpider):
     name = 'zhushou'
     start_urls = [
-            'http://zhushou.360.cn/',
-            'http://zhushou.360.cn/list/index/cid/1/size/all/lang/all/order/download/?page=1',
-            'http://zhushou.360.cn/list/index/cid/2/size/all/lang/all/order/download/?page=1',
+            #'http://zhushou.360.cn/',
+            'http://zhushou.360.cn/detail/index/soft_id/7953',
+            #'http://zhushou.360.cn/list/index/cid/1/size/all/lang/all/order/download/?page=1',
+            #'http://zhushou.360.cn/list/index/cid/2/size/all/lang/all/order/download/?page=1',
             ]
     def parse(self, response):
         items = []

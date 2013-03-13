@@ -11,16 +11,13 @@ from scrapy.selector import HtmlXPathSelector
 from scrapy.conf import settings
 from scrapy.http import Request
 from crawler.items import *
-from crawler.urls import geturls
 class Spider(CrawlSpider):
     name = 'anzhi'
     #start_urls = geturls("anzhi","content")
     start_urls = [
-        'http://www.anzhi.com/soft_505956.html',
-        'http://www.anzhi.com/soft_573085.html',
-        'http://www.anzhi.com/soft_585612.html',
-        'http://www.anzhi.com/sort_1_1_hot.html',
-        'http://www.anzhi.com/sort_2_1_hot.html',
+        'http://www.anzhi.com/soft_688235.html'
+        #'http://www.anzhi.com/sort_1_1_hot.html',
+        #'http://www.anzhi.com/sort_2_1_hot.html',
             ]
     def parse(self, response):
         items = []
@@ -61,6 +58,7 @@ def parse_content(response):
         item['market'] = "anzhi"
         item['md5'] = md5(response.url).hexdigest()
         item['url'] = response.url
+        print item['url']
         item['app_id'] = re.findall(r"\d+",response.url)[-1]
         item['name'] = hxs.select("//div[@class=\"titleline\"][1]/h1/text()").extract()[0]
         item['update_time'] = hxs.select("//div[@class=\"titleline\"][2]/span[3]/text()").extract()[0][3::]

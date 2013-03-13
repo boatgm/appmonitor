@@ -16,9 +16,10 @@ from crawler.urls import geturls
 class Spider(CrawlSpider):
     name = 'hiapk'
     start_urls = [
-            'http://apk.hiapk.com/App.aspx?action=FindAppSoftList',#POST categoryId:0,currentHash:2_1_0_0_0_0_0  3_1_0_0_0_0_0
-            'http://apk.hiapk.com/Game.aspx?action=FindGameSoftList',
-            #'http://apk.hiapk.com/html/2012/12/1030082.html',
+            #'http://apk.hiapk.com/App.aspx?action=FindAppSoftList',#POST categoryId:0,currentHash:2_1_0_0_0_0_0  3_1_0_0_0_0_0
+            #'http://apk.hiapk.com/Game.aspx?action=FindGameSoftList',
+            'http://apk.hiapk.com/html/2012/12/1030082.html',
+            'http://apk.hiapk.com/html/2011/12/380904.html'
             #'http://apk.hiapk.com/html/2012/12/1084607.html',
             ]
     def parse(self, response):
@@ -68,6 +69,8 @@ def parse_content(response):
         item['description'] = hxs.select("//label[@id=\"ctl00_AndroidMaster_Content_Apk_Description\"]/text()").extract()[0]
         item['category'] = hxs.select("//label[@id=\"ctl00_AndroidMaster_Content_Apk_SoftCategory\"]/text()").extract()[0]
         item['level'] = hxs.select("//div[@class=\"star_num\"]/text()").extract()[0]
+        print dict(item)
+        print "############################"
         items.append(item)
     except Exception as e :
         error = ErrorItem()

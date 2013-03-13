@@ -51,12 +51,10 @@ class mongo_storage(object):
             self.db.exceptions.update({"market":item['market'],"date":self.date},
                     {"$addToSet":{"unknown_catagory":item['category']}},True)
 
+        #self.db.appmeta.update({'md5':item['md5']},
+        #        {"$set":dict(item)},True)
         self.db.appmeta.update({'md5':item['md5']},
-                {"$set":dict(item)},True)
-
-        self.db.appmeta.update({'md5':item['md5']},
-                {"$set":{"avaiable":1}},True)
-
+                {"$set":{"avaiable":1,"url":item['url'],"name":item["name"],"market":item['market']}},True)
         self.db.market.update({'market':item['market']},
                 {"$inc":{"content."+self.date : 1}},True)
 
