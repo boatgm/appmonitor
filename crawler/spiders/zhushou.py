@@ -1,6 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
 import urlparse
 import re
 import json
+import requests
 import traceback
 
 from md5 import md5
@@ -152,8 +155,8 @@ def parse_comment(response):
         for t in data['data']['messages']:
             item = CommentItem()
             item['md5'] = md5(response.url)
-            item['content']=t['comment']
-            item['date']=t['create_time']
+            item['content'] = t['comment']
+            item['date'] = t['create_time']
             item['username'] = t['username']
             items.append(item)
     except Exception as e :
@@ -161,6 +164,29 @@ def parse_comment(response):
         Error['md5'] = item['md5']
         Error['market'] = item['market']
         Error['itemtype'] = 'comment'
+        Error['info'] = str(e)
+        Error['traceback'] = traceback.format_exc()
+        items.append(Error)
+    return items
+
+def parse_update(response):
+    items = []
+    hxs = HtmlXPathSelector(response)
+    app_id = re.findall(r"\d+",response.url)[-1]
+    url = "http://zhushou.360.cn/index/gettips/sid/" + app_id
+    try :
+        item = UpdateItem()
+        item['market'] = "zhushou"
+        item['url'] = response.url
+        item['md5'] = md5(response.url).hexdigest()
+        #item['down'] = int(requests.get(url).json()['download_times'])
+        item['down'] = hxs.select("//dl[@class=\"clearfix\"]/dd/p/text()").re(ur"\d+次")[0][6:]
+        items.append(item)
+    except Exception as e :
+        Error = ErrorItem()
+        Error['md5'] = item['md5']
+        Error['market'] = item['market']
+        Error['itemtype'] = 'update'
         Error['info'] = str(e)
         Error['traceback'] = traceback.format_exc()
         items.append(Error)

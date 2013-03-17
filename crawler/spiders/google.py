@@ -93,3 +93,24 @@ def parse_content(response):
         error['traceback'] = traceback.format_exc()
         items.append(error)
     return items
+
+
+def parse_update(response):
+    items = []
+    hxs = HtmlXPathSelector(response)
+    try :
+        item = UpdateItem()
+        item['market'] = "google"
+        item['url'] = response.url
+        item['md5'] = md5(response.url).hexdigest()
+        item['down'] = hxs.select("//dd[@itemprop=\"numDownloads\"]/text()").extract()[0]
+        items.append(item)
+    except Exception as e :
+        Error = ErrorItem()
+        Error['md5'] = item['md5']
+        Error['market'] = item['market']
+        Error['itemtype'] = 'update'
+        Error['info'] = str(e)
+        Error['traceback'] = traceback.format_exc()
+        items.append(Error)
+    return items

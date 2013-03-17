@@ -1,7 +1,7 @@
 AAPT_PATH = '/home/boat/workspace/code/minicrawler/tool/'
 STORE_PATH = '/home/boat/workspace/data/package'
 PROJECT_PATH = '/home/boat/workspace/code/minicrawler'
-LIMIT = 10000
+LIMIT = 100000
 
 BOT_NAME = 'marketcrawler'
 

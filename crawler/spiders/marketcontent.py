@@ -27,22 +27,22 @@ class Spider(CrawlSpider):
     def parse(self,response):
         items = []
         if re.match(ur".*itunes\.apple\.com.*",response.url):
-            items+=itunes.parse_content_links(response)
+            #items+=itunes.parse_content_links(response)
             items+=itunes.parse_content(response)
         if re.match(ur".*zhushou\.360\.cn.*",response.url):
-            items+=zhushou.parse_content_links(response)
+            #items+=zhushou.parse_content_links(response)
             items+=zhushou.parse_content(response)
         elif re.match(ur".*waptw\.com.*",response.url):
-            items+=waptw.parse_content_links(response)
+            #items+=waptw.parse_content_links(response)
             items+=waptw.parse_content(response)
         #elif re.match(ur".*anzhi\.com.*",response.url):
         #    items+=anzhi.parse_content_links(response)
         #    items+=anzhi.parse_content(response)
         elif re.match(ur".*google\.com.*",response.url):
-            items+=google.parse_content_links(response)
+            #items+=google.parse_content_links(response)
             items+=google.parse_content(response)
         elif re.match(ur".*nduoa\.com.*",response.url):
-            items+=nduoa.parse_content_links(response)
+            #items+=nduoa.parse_content_links(response)
             items+=nduoa.parse_content(response)
         #elif re.match(ur".*hiapk\.com.*",response.url):
         #    items+=hiapk.parse_content_links(response)

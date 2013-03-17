@@ -8,8 +8,7 @@ from scrapy.selector import HtmlXPathSelector
 from scrapy.http import Request,Response,TextResponse
 from scrapy.conf import settings
 from crawler.items import *
-from crawler.spiders import waptw,zhushou,anzhi
-from crawler.urls import geturls
+from crawler.spiders import waptw,zhushou,anzhi,google
 
 class Spider(CrawlSpider):
     name = 'marketrank'
@@ -19,7 +18,6 @@ class Spider(CrawlSpider):
             'http://www.waptw.com/sonyericsson/x11/rank/month/0/1',
             'http://www.waptw.com/sonyericsson/x11/rank/all/0/1',
             'http://zhushou.360.cn/list/index/cid/1?page=1',
-            'http://anzhi.com/list_1_1_hot.html'
             'https://play.google.com/store/apps/category/APPLICATION/collection/topselling_free?start=0&num=24',
             ]
 
@@ -37,7 +35,7 @@ class Spider(CrawlSpider):
                 yield Request(url, callback=self.parse_rankpage)
         if re.match(".*play\.google\.com.*",response.url):
             for pagenum in range(480,0,-24):
-                url = re.sub(r"\d+$",str(pagenum),response.url)
+                url = re.sub(r"start=\d+","start="+str(pagenum),response.url)
                 yield Request(url, callback=self.parse_rankpage)
 
     def parse_rankpage(self, response):
@@ -48,5 +46,5 @@ class Spider(CrawlSpider):
         if re.match(".*zhushou\.360\.cn.*",response.url):
             items += zhushou.parse_rankpage(response)
         if re.match(".*play\.google\.com.*",response.url):
-            items += google.parse_rankpage(response)
+            items += google.parse_content_links(response)
         return items
