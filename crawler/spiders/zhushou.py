@@ -180,7 +180,7 @@ def parse_update(response):
         item['url'] = response.url
         item['md5'] = md5(response.url).hexdigest()
         #item['down'] = int(requests.get(url).json()['download_times'])
-        item['down'] = hxs.select("//dl[@class=\"clearfix\"]/dd/p/text()").re(ur"\d+次")[0][6:]
+        item['down'] = hxs.select("//dl[@class=\"clearfix\"]/dd/p/text()").re(ur"：\d+次")[0][6:]
         items.append(item)
     except Exception as e :
         Error = ErrorItem()
