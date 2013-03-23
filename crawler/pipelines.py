@@ -29,32 +29,28 @@ class mongo_storage(object):
         else:
             raise DropItem("Unknown Item Type !!!")
         return item
+
     def process_error_item(self,item):
         self.db.exceptions.update({"market":item['market'],"date":self.date,"itemtype":item['itemtype']},
                 {"$inc":{"num":1},"$set":{item['md5']:{item['info']:item['traceback']}}},True)
         self.db.appmeta.update({"md5":item['md5']},{"$set":{"avaiable":3}})
 
     def process_meta_item(self,item):
-        """ process content meta, conten meta update immediately. """
         utf8_name = item['name']
         if len(utf8_name.encode('utf-8'))-len(utf8_name)>0:
             item["language"] = "ch"
         else:
             item["language"] = "en"
-        try:
-            #item['category_detail'] = UMDict[str(item['categroy'])]
-            pass
-        except Exception as e:
-            self.db.exceptions.update({"market":item['market'],"date":self.date},
-                    {"$addToSet":{"unknown_catagory":item['category']}},True)
+        item['description'] = "".join(item['description'].split())
+
+        self.db.category.update({"category":item['category']},{"$inc":{"total":1}},True)
 
         self.db.appmeta.update({'md5':item['md5']},
                 {"$set":dict(item)},True)
 
         self.db.appmeta.update({'md5':item['md5']},
                 {"$set":{"avaiable":1}},True)
-        #self.db.appmeta.update({'md5':item['md5']},
-        #        {"$set":{"avaiable":1,"url":item['url'],"name":item["name"],"market":item['market']}},True)
+
         self.db.market.update({'market':item['market']},
                 {"$inc":{"content."+self.date : 1}},True)
 
@@ -74,18 +70,12 @@ class mongo_storage(object):
                     {"$inc":{"LinkItem."+self.date : 1}},True)
 
     def process_update_item(self,item):
-        """ update item`s download number"""
-        if True:
-            self.db.appmeta.update({'md5':item['md5']},{"$set":{
-                'md5':item['md5'],
-                'url':item['url'],
-                'market':item['market'],
-                'download':{self.date:item['down']}
-                }},True)
+        self.db.appmeta.update({'md5':item['md5']},
+            {"$set":{'download.' + self.date : item['down']}})
 
     def process_apk_item(self,item):
         self.db.appmeta.update({'md5':item['md5']},
-            {"$set":{"package_name":item['package_name']}},True)
+            {"$set":{"package_name":item['package_name']}})
 
     def process_market_item(self,item):
         self.db.market.update({"market":item['name']},

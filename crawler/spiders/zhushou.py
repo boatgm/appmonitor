@@ -172,15 +172,12 @@ def parse_comment(response):
 def parse_update(response):
     items = []
     hxs = HtmlXPathSelector(response)
-    app_id = re.findall(r"\d+",response.url)[-1]
-    url = "http://zhushou.360.cn/index/gettips/sid/" + app_id
     try :
         item = UpdateItem()
         item['market'] = "zhushou"
         item['url'] = response.url
         item['md5'] = md5(response.url).hexdigest()
-        #item['down'] = int(requests.get(url).json()['download_times'])
-        item['down'] = hxs.select("//dl[@class=\"clearfix\"]/dd/p/text()").re(ur"：\d+次")[0][6:]
+        item['down'] = hxs.select("//dl[@class=\"clearfix\"]/dd/p/text()").re(ur"：\d+次")[0][1:-1:]
         items.append(item)
     except Exception as e :
         Error = ErrorItem()

@@ -28,7 +28,7 @@ def contenturls():
 def updateurls():
     urls = []
     db = DBUtil.get_db()
-    res = db.appmeta.find({"avaiable":1},{"url":1,"md5":1,"_id":0},limit=LIMIT)
+    res = db.appmeta.find({"avaiable":1},{"url":1,"md5":1,"_id":0})
     for row in list(res):
         urls.append(row['url'])
         #db.appmeta.update({"md5":row['md5']},{"$inc":{"lock":2}})
