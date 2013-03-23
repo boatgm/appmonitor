@@ -1,4 +1,5 @@
 import pymongo
+import MySQLdb
 from crawler.settings import MONGODB
 class mongo():
     db = None
